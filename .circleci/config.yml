@@ -6,7 +6,7 @@ jobs:
       - image: circleci/android:api-28-alpha
     resource_class: xlarge
     environment:
-      JAVA_TOOL_OPTIONS: "-Xmx4096m"
+      JAVA_TOOL_OPTIONS: "-Xmx8192m"
       GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
       TERM: dumb
     steps:
