@@ -1,4 +1,7 @@
-version: 2
+version: 2.1
+
+orbs:
+  ganta-git: ganta/git@1.2.0
 
 jobs:
   build:
@@ -10,7 +13,7 @@ jobs:
       GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
       TERM: dumb
     steps:
-      - checkout
+      - ganta-git/shallow-clone-checkout
       - restore_cache:
           key: jars-{{ .Branch }}-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
       - run:
@@ -29,4 +32,4 @@ jobs:
           destination: reports
       - store_test_results:
           path: app/build/test-results
-          
+
