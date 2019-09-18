@@ -23,13 +23,9 @@ jobs:
           paths:
             - ~/.gradle/caches
             - ~/.gradle/wrapper
-      - run: |
-          pwd
-          ls -la
-          circleci tests glob "app/src/test/**/*.kt" | circleci tests split --split-by=timings
       - run:
           name: Run JVM Tests & Lint
-          command: ./gradlew test "`circleci tests glob "app/src/test/**/*.kt" | circleci tests split --split-by=timings | sed -E 's/^(.*com\/)*/--tests com\//' | sed -E 's/\//./g' | sed -E 's/.kt//' | sed -z 's/\n/ /g'`"
+          command: ./gradlew check
       - store_artifacts:
           path: app/build/reports
           destination: reports
