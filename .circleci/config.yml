@@ -1,19 +1,15 @@
 version: 2.1
 
-orbs:
-  ganta-git: ganta/git@1.2.0
-
 jobs:
   build:
     docker:
       - image: circleci/android:api-28-alpha
-    resource_class: large
+    resource_class: xlarge
     environment:
       JAVA_TOOL_OPTIONS: "-Xmx1024m"
       GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
       TERM: dumb
     steps:
-      - ganta-git/shallow-clone-checkout
       - restore_cache:
           key: jars-{{ .Branch }}-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
       - run:
