@@ -11,12 +11,12 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          jars-{{ .Branch }}-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+          key: jars-{{ .Branch }}-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
       - run:
           name: Download Dependencies
           command: ./gradlew dependencies
       - save_cache:
-          jars-{{ .Branch }}-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+          key: jars-{{ .Branch }}-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
           paths:
             - ~/.gradle/caches
             - ~/.gradle/wrapper
