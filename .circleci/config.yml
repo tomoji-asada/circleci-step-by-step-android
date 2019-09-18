@@ -1,9 +1,5 @@
 version: 2
 
-references:
-  cache_key: &cache_key
-    key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
-
 jobs:
   build:
     docker:
@@ -15,12 +11,12 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          <<: *cache_key
+          jars-{{ .Branch }}-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
       - run:
           name: Download Dependencies
           command: ./gradlew dependencies
       - save_cache:
-          <<: *cache_key
+          jars-{{ .Branch }}-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
           paths:
             - ~/.gradle/caches
             - ~/.gradle/wrapper
@@ -32,3 +28,4 @@ jobs:
           destination: reports
       - store_test_results:
           path: app/build/test-results
+
