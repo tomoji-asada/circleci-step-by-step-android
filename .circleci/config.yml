@@ -5,10 +5,11 @@ jobs:
     docker:
       - image: circleci/android:api-28
     resource_class: xlarge
+    parallelism: 2
     environment:
       JAVA_TOOL_OPTIONS: "-Xmx1024m"
       GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=8"
-      
+
       TERM: dumb
     steps:
       - checkout
