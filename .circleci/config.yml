@@ -23,6 +23,9 @@ jobs:
           paths:
             - ~/.gradle/caches
             - ~/.gradle/wrapper
+      - run: |
+          pwd
+          ls -la
       - run:
           name: Run JVM Tests & Lint
           command: ./gradlew check -i -PtestFilter="`circleci tests glob "app/src/test/**/*.kt" | circleci tests split --split-by=timings`"
