@@ -26,6 +26,7 @@ jobs:
       - run: |
           pwd
           ls -la
+          circleci tests glob "app/src/test/**/*.kt" | circleci tests split --split-by=timings
       - run:
           name: Run JVM Tests & Lint
           command: ./gradlew check -i -PtestFilter="`circleci tests glob "app/src/test/**/*.kt" | circleci tests split --split-by=timings`"
