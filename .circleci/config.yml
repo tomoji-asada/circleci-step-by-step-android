@@ -1,6 +1,6 @@
 version: 2.1
 
-jogs:
+jobs:
   build:
   docker:
     - image: circleci/android:api-28
