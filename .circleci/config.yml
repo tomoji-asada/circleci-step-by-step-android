@@ -1,17 +1,19 @@
-version: 2.1
+version: 2.1 
+2 
+ 
+3 jobs: 
+4   build: 
+5     docker: 
+6       - image: circleci/android:api-28 
+7     steps: 
+8       - checkout 
+9       - run: echo $CIRCLE_JOB 
+10       - run: 
+11           name: Single command -  echo 
+12           command: echo $CIRCLE_USERNAME 
+13       - run: 
+14           name: Multi-line commands - echo & echo 
+15           command: | 
+16             echo $CIRCLE_REPOSITORY_URL 
+17             echo $CIRCLE_BRANCH 
 
-jobs:
-  build:
-  docker:
-    - image: circleci/android:api-28
-  steps:
-    - checkout
-    - run: echo $CIRCLE_JOB
-    - run:
-        name: Single command -  echo
-        command: echo $CIRCLE_USERNAME
-    - run:
-        name: Multi-line commands - echo & echo
-        command: |
-          echo $CIRCLE_REPOSITORY_URL
-          echo $CIRCLE_BRANCH
